@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar: pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-in">
+    <div>
+      <h1>Token Launch Radar</h1>
+      <p class="tagline">Protocols that record no token yet, ranked by what their launch would be worth, each with the steps to farm it.</p>
+    </div>
+    <div class="stats" id="stats" aria-label="Board statistics"></div>
+  </div>
+  <p class="model-line" id="model-line"></p>
+</header>
+
+<section class="controls" aria-label="Board controls">
+  <label class="ctl grow">Search
+    <input id="q" type="search" placeholder="Name or slug" autocomplete="off">
+  </label>
+  <label class="ctl">Category
+    <select id="cat"><option value="">All categories</option></select>
+  </label>
+  <label class="ctl">Chain
+    <select id="chain"><option value="">All chains</option></select>
+  </label>
+  <label class="ctl">Sort by
+    <select id="sort">
+      <option value="rank">Implied value</option>
+      <option value="tvl">TVL</option>
+      <option value="growth">7d growth</option>
+      <option value="age">Track record</option>
+      <option value="multiple">Peer multiple</option>
+    </select>
+  </label>
+  <label class="ctl check"><input id="watch" type="checkbox"> Watchlist only</label>
+  <div class="seg" role="group" aria-label="View">
+    <button id="view-board" class="seg-on" type="button">Pre-token board</button>
+    <button id="view-live" type="button">Live tokens</button>
+  </div>
+</section>
+
+<main>
+  <section id="detail" class="detail" hidden></section>
+
+  <section id="board-wrap">
+    <table class="board" id="board">
+      <thead><tr>
+        <th class="num">#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+        <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+        <th class="num">Peer x</th><th class="num">Implied value</th><th class="bar-cell">Value / TVL</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No protocol matches those filters. Loosen one and the board fills again.</p>
+  </section>
+
+  <section id="live-wrap" hidden>
+    <p class="live-note">These protocols already trade, so the radar does not rank them: it learns from them. Each category's peer multiple above is the median of this set's market cap per dollar of TVL.</p>
+    <table class="board" id="live-table">
+      <thead><tr>
+        <th>Protocol</th><th>Symbol</th><th>Category</th><th class="num">TVL</th>
+        <th class="num">Market cap</th><th class="num">7d</th><th class="num">Cap / TVL</th>
+      </tr></thead>
+      <tbody id="live-rows"></tbody>
+    </table>
+  </section>
+
+  <section class="model" id="model">
+    <h2>How the implied value is worked out</h2>
+    <div id="model-body"></div>
+    <h3>Peer multiples learned from this snapshot</h3>
+    <div class="mults" id="mults"></div>
+  </section>
+</main>
+
+<footer>
+  <p id="foot"></p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
